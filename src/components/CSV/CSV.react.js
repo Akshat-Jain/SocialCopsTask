@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CSVReader from 'react-csv-reader'
+import CSVReader from 'react-csv-reader';
 import "./CSV.css";
 
 class CSV extends Component {
@@ -7,18 +7,30 @@ class CSV extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null
+      data: null,
+      battingScore: null,
     };
   }
 
   handleForce = (data) => {
     this.setState({
-      data: data
+      data,
+    })
+    this.handleBattingScore();
+  };
+
+  handleBattingScore = () => {
+    var battingScore = [];
+    for (var i = 1; i < this.state.data.length-1; i++) {
+      battingScore.push(this.state.data[i][0]);
+    }
+    this.setState({
+      battingScore,
     })
   };
 
   render() {
-    {console.log(this.state.data)}
+    {console.log(this.state.battingScore)}
     return (
         <div className="container">
         <CSVReader
